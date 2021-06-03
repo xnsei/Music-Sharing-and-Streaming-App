@@ -16,6 +16,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.jean.jcplayer.model.JcAudio;
 import com.example.jean.jcplayer.view.JcPlayerView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -44,10 +46,24 @@ public class MainActivity extends AppCompatActivity {
     List<JcAudio> jcAudios;
     List<String> thumbnail;
 
+    private FirebaseAuth mAuth;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mAuth = FirebaseAuth.getInstance();
+
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        if(currentUser != null){
+            startMainActivity();
+        }
+
+    }
+
+    private void startMainActivity(){
         progressDialog = new ProgressDialog(this);
         progressDialog.show();
         progressDialog.setMessage("Please Wait...");
@@ -71,6 +87,23 @@ public class MainActivity extends AppCompatActivity {
                 adapter.notifyDataSetChanged();
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        // check if user is already signed in?
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        if(currentUser == null){
+            UpdateUI();
+        }
+    }
+
+    private void UpdateUI() {
+        Intent startIntent = new Intent(MainActivity.this, StartActivity.class);
+        startActivity(startIntent);
+        finish();
     }
 
     // RETRIEVING THE SONGS FROM THE SERVER
@@ -118,18 +151,25 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        super.onOptionsItemSelected(item);
         if (item.getItemId() == R.id.uploadItem){
             if (validatePermissions()){
                 Intent intent = new Intent(this,UploadSongsActivity.class);
                 startActivity(intent);
             }
         }
+
+        else if (item.getItemId() == R.id.signOut){
+            FirebaseAuth.getInstance().signOut();
+            UpdateUI();
+        }
+
 //        listView.setAdapter(null);
         progressDialog = new ProgressDialog(this);
         progressDialog.show();
         progressDialog.setMessage("Please Wait...");
         retrieveSongs();
-        return super.onOptionsItemSelected(item);
+        return true;
     }
 
     // METHOD TO HANDEL RUNTIME PERMISSIONS
