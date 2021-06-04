@@ -16,6 +16,7 @@ Android Studio was used as a building platform and Firebase was used to store th
     <img src="https://github.com/xnsei/Project-Spotify/blob/main/images/3.jpg" width="32%">
 </div>
 
+##
 <div style="dispaly:flex">
     <img src="https://github.com/xnsei/Project-Spotify/blob/main/images/4.jpg" width="32%">
     <img src="https://github.com/xnsei/Project-Spotify/blob/main/images/5.jpg" width="32%">
