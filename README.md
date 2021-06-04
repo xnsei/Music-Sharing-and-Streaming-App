@@ -9,6 +9,7 @@ Android Studio was used as a building platform and Firebase was used to store th
 4. Availability of notifications.
 5. You can easily track songs/music.
 
+##
 <div style="dispaly:flex">
     <img src="https://github.com/xnsei/Project-Spotify/blob/main/images/1.jpg" width="32%">
     <img src="https://github.com/xnsei/Project-Spotify/blob/main/images/2.jpg" width="32%">
