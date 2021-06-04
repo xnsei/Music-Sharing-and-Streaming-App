@@ -21,3 +21,9 @@ Android Studio was used as a building platform and Firebase was used to store th
     <img src="https://github.com/xnsei/Project-Spotify/blob/main/images/4.jpg" width="32%">
     <img src="https://github.com/xnsei/Project-Spotify/blob/main/images/5.jpg" width="32%">
 </div>
+
+
+## Future Tasks
+1. Imaplementation of different groups containing different genre of music
+
+### Note : I do not own any of the music used in this app, this is for education purpose only.
